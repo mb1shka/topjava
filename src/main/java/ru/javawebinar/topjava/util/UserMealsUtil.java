@@ -31,15 +31,15 @@ public class UserMealsUtil {
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         // TODO return filtered list with excess. Implement by cycles
         List<UserMealWithExcess> newMeals = new ArrayList<>();
-        boolean lessCaloriesThenNeeded = true;
+        boolean moreCaloriesThenNeeded = false;
 
         for (int i = 0; i < meals.size(); i++) {
             LocalDateTime localDateTime = meals.get(i).getDateTime();
             if (TimeUtil.isBetweenHalfOpen(localDateTime.toLocalTime(), startTime, endTime)) {
                 if (meals.get(i).getCalories() > caloriesPerDay) {
-                    lessCaloriesThenNeeded = false;
+                    moreCaloriesThenNeeded = true;
                 }
-                newMeals.add(new UserMealWithExcess(meals.get(i).getDateTime(), meals.get(i).getDescription(), meals.get(i).getCalories(), lessCaloriesThenNeeded));
+                newMeals.add(new UserMealWithExcess(meals.get(i).getDateTime(), meals.get(i).getDescription(), meals.get(i).getCalories(), moreCaloriesThenNeeded));
             }
         }
         return newMeals;
