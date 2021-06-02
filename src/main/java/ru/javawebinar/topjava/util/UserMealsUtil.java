@@ -52,11 +52,15 @@ public class UserMealsUtil {
         // TODO Implement by streams
         List<UserMeal> sortedMeal = meals.stream().filter(meal -> TimeUtil.isBetweenHalfOpen(meal.getDateTime().toLocalTime(), startTime, endTime)).collect(Collectors.toList());
 
-        List<UserMealWithExcess> finalMeal = new ArrayList<>();
+        boolean moreCaloriesThenNeeded = false;
+        List<UserMealWithExcess> userMealWithExcessList = new ArrayList<>();
         for (UserMeal meal : sortedMeal) {
-            finalMeal.add(new UserMealWithExcess(meal.getDateTime(), meal.getDescription(), meal.getCalories(), true));
+            if (meal.getCalories() > caloriesPerDay) {
+                moreCaloriesThenNeeded = true;
+            }
+            userMealWithExcessList.add(new UserMealWithExcess(meal.getDateTime(), meal.getDescription(), meal.getCalories(), moreCaloriesThenNeeded));
         }
-        return finalMeal;
+        return userMealWithExcessList;
 
         //TODO добавить поиск, превышает ли количество калорий
     }
