@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 public class MealServlet extends HttpServlet {
 
-    private static final LoggerWrapper LOG
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

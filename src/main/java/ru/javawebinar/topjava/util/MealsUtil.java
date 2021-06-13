@@ -14,11 +14,7 @@ public class MealsUtil {
     private static List<Meal> meals;
     public static void main(String[] args) {
 
-/*
-        List<MealTo> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
-        mealsTo.forEach(System.out::println);*/
 
-//        System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
     }
 
     public static List<Meal> getMeals() {
