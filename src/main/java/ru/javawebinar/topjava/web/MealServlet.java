@@ -36,7 +36,7 @@ public class MealServlet extends HttpServlet {
 */
 
 
-        req.setAttribute("meals", MealsUtil.getMeals());
-        req.getRequestDispatcher("//meals.jsp").forward(req, resp);
+      /*  req.setAttribute("meals", MealsUtil.getMeals());*/
+      /*  req.getRequestDispatcher("//meals.jsp").forward(req, resp);*/
     }
 }
