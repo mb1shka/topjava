@@ -4,6 +4,8 @@ import static ru.javawebinar.topjava.util.MealsUtil.DEFAULT_CALORIES_PER_DAY;
 
 public class SecurityUtil {
 
+    //заглушка для security (security пройдем потом)
+
     public static int authUserId() {
         return 1;
     }
