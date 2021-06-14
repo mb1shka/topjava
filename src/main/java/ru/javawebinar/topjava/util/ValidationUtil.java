@@ -28,6 +28,7 @@ public class ValidationUtil {
 
     public static void checkNew(AbstractBaseEntity entity) {
         //проверяет, что entity, который пришел в контроллер, действительно имеет нулевой id
+        //если id не нулевой, то это будет exception
         if (!entity.isNew()) {
             throw new IllegalArgumentException(entity + " must be new (id=null)");
         }
