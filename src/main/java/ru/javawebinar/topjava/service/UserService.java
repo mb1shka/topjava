@@ -9,8 +9,15 @@ import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFound;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 
 public class UserService {
+    //Bean - внедрен как бин в spring-app.xml
+    //В бине UserService - UserRepository - зависимость, которую мы объявляем с помощью конструктора в этом классе (IoC)
+    //лучше внедрять через конструктор, через поле - плохая практика
 
-    private UserRepository repository;
+    private final UserRepository repository;
+
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
 
     public User create(User user) {
         return repository.save(user);
