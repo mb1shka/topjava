@@ -56,6 +56,8 @@ public class MealRestController {
         int userId = SecurityUtil.authUserId();
         log.info("update {} for user {}", meal, userId);
         assureIdConsistent(meal, id);
+        //проверяем, что id консистентный, то есть в еде он должен быть либо нулевой, либо совпадать с параметром id
+        //ЭТИ ПРОВЕРКИ ЧАСТО НЕ ДЕЛАЮТСЯ В ВЫПУСКНЫХ РАБОТАХ, ХОТЯ ДОЛЖНЫ!
         service.update(meal, userId);
     }
 

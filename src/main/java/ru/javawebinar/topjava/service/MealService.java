@@ -14,7 +14,7 @@ import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class MealService {
-    //сделать в дз
+    //кроме делегирования тут только проверка
 
     private final MealRepository repository;
 
