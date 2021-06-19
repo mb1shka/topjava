@@ -5,6 +5,7 @@ import org.springframework.util.CollectionUtils;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.MealsUtil;
+import ru.javawebinar.topjava.util.Util;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository.ADMIN_ID;
@@ -24,6 +26,8 @@ public class InMemoryMealRepository implements MealRepository {
 
     // Map  userId -> (mealId-> meal)
     private final Map<Integer, Map<Integer, Meal>> usersMealsMap = new ConcurrentHashMap<>();
+    //мультимапа - Guava multimap
+    //ключ - userId
     private final AtomicInteger counter = new AtomicInteger(0);
 
     {
@@ -36,6 +40,7 @@ public class InMemoryMealRepository implements MealRepository {
     @Override
     public Meal save(Meal meal, int userId) {
         Map<Integer, Meal> meals = usersMealsMap.computeIfAbsent(userId, ConcurrentHashMap::new);
+        //если ключика userId нет, то мы создаем новый ConcurrentHashMap
         if (meal.isNew()) {
             meal.setId(counter.incrementAndGet());
             meals.put(meal.getId(), meal);
@@ -58,10 +63,23 @@ public class InMemoryMealRepository implements MealRepository {
     }
 
     @Override
+    public List<Meal> getBetweenHalfOpen(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
+        return filterByPredicate(userId, meal -> Util.isBetweenHalfOpen(meal.getDateTime(), startDateTime, endDateTime));
+    }
+
+    @Override
     public List<Meal> getAll(int userId) {
+        return filterByPredicate(userId, meal -> true);
+    }
+
+    private List<Meal> filterByPredicate(int userId, Predicate<Meal> filter) {
         Map<Integer, Meal> meals = usersMealsMap.get(userId);
         return CollectionUtils.isEmpty(meals) ? Collections.emptyList() :
+                //необходимо проверять на отсутствие юзера
+                //в случае его отсутствия возвращаем пустой список
+                //если есть - сортируем по времени и разворачиваем, чтобы последняя еда была на верху списка
                 meals.values().stream()
+                        .filter(filter)
                         .sorted(Comparator.comparing(Meal::getDateTime).reversed())
                         .collect(Collectors.toList());
     }
