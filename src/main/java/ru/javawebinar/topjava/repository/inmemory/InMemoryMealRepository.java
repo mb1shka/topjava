@@ -1,11 +1,15 @@
 package ru.javawebinar.topjava.repository.inmemory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.util.Util;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Collections;
@@ -21,6 +25,7 @@ import static ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository.
 
 @Repository
 public class InMemoryMealRepository implements MealRepository {
+    private static final Logger log = LoggerFactory.getLogger(InMemoryMealRepository.class);
 
     // Map  userId -> (mealId-> meal)
     //private final Map<Integer, Map<Integer, Meal>> usersMealsMap = new ConcurrentHashMap<>();
@@ -50,6 +55,20 @@ public class InMemoryMealRepository implements MealRepository {
         return meals.save(meal);
     }
 
+
+    @PostConstruct
+    //аннотация отвечает за то, что происходит после создания бина
+    //обычно используется перед методом init()
+    public void postConstruct() {
+        log.info("+++ PostConstruct");
+    }
+
+    @PreDestroy
+    //аннотация отвечает за то, что происходит перед удалением бина
+    //обычно используется перед методом destroy()
+    public void preDestroy() {
+        log.info("+++ PreDestroy");
+    }
 
     @Override
     public boolean delete(int id, int userId) {
