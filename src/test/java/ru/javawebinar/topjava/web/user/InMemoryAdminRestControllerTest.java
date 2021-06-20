@@ -21,19 +21,26 @@ public class InMemoryAdminRestControllerTest {
     private static InMemoryUserRepository repository;
 
     @BeforeClass
+    //выполняется один раз перед всем тестированием
+    //выполняется после того как JUnit создал экхемпляр InMemory... класса (класса, в котором пишется метод)
     public static void beforeClass() {
         appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        //поднимаем контекст Спринга
         log.info("\n{}\n", Arrays.toString(appCtx.getBeanDefinitionNames()));
+        //С помощью контекста (DI) мы получаем доступ к классам
         controller = appCtx.getBean(AdminRestController.class);
         repository = appCtx.getBean(InMemoryUserRepository.class);
     }
 
     @AfterClass
+    //выполняется один раз после того, как все тесты прошли
+    //выполняется перед тем как JUnit удалит экзампляр класса, в котором мы пишем этот метод
     public static void afterClass() {
         appCtx.close();
     }
 
     @Before
+    //код, отмеченный так, выполняется перед каждым тестом
     public void setup() {
         // re-initialize
         repository.init();
