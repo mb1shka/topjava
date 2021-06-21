@@ -11,6 +11,15 @@ public class Meal extends AbstractBaseEntity {
 
     private final int calories;
 
+    public Meal() {
+
+    }
+
+    public Meal(Meal m) {
+        this(m.getId(), m.getDateTime(), m.getDescription(), m.getCalories());
+        //TODO: разобраться, нужен ли вообще этот класс и почему поля подчеркиваются после создания пустого конструктора
+    }
+
     public Meal(LocalDateTime dateTime, String description, int calories) {
         this(null, dateTime, description, calories);
     }
