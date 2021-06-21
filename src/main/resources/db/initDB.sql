@@ -7,7 +7,9 @@ CREATE SEQUENCE global_seq START WITH 100000;
 CREATE TABLE users
 (
     id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+    --primary key = не будет двух юзеров с одинаковым айдишником
     name             VARCHAR                           NOT NULL,
+    --VARCHAR = строка
     email            VARCHAR                           NOT NULL,
     password         VARCHAR                           NOT NULL,
     registered       TIMESTAMP           DEFAULT now() NOT NULL,
@@ -15,11 +17,15 @@ CREATE TABLE users
     calories_per_day INTEGER             DEFAULT 2000  NOT NULL
 );
 CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
+--говорит о том, что email у нас унмкальный
+--(нельзя содзать двух пользователей с 1 и той же почтой)
 
 CREATE TABLE user_roles
 (
     user_id INTEGER NOT NULL,
     role    VARCHAR,
+    --OPTIONAL!!
     CONSTRAINT user_roles_idx UNIQUE (user_id, role),
+    --у 1 и того же юзера не может быть одинаковых ролей
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
