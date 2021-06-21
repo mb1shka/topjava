@@ -17,7 +17,7 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 //аннотация говорит, что мы из xml файла берем контекст (данные)
 
 @RunWith(SpringRunner.class)
-//через аннотацию хапускается Спринг, как я поняла
+//через аннотацию запускается Спринг, как я поняла
 
 public class InMemoryAdminRestControllerSpringTest {
 

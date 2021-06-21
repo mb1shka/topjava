@@ -1,8 +1,13 @@
 package ru.javawebinar.topjava.model;
 
 public abstract class AbstractBaseEntity {
+    public static final int START_SEQ = 100000;
+
     protected Integer id;
     //primary key
+
+    public AbstractBaseEntity() {
+    }
 
     protected AbstractBaseEntity(Integer id) {
         this.id = id;
@@ -18,11 +23,28 @@ public abstract class AbstractBaseEntity {
 
     public boolean isNew() {
         return this.id == null;
-        //если id == null, то это новый обхъект
+        //если id == null, то это новый объект
     }
 
     @Override
     public String toString() {
         return getClass().getSimpleName() + ":" + id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        AbstractBaseEntity that = (AbstractBaseEntity) o;
+        return id != null && id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id == null ? 0 : id;
     }
 }
