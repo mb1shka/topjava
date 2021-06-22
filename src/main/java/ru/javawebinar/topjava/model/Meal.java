@@ -5,11 +5,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Meal extends AbstractBaseEntity {
-    private final LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
-    private final String description;
+    private String description;
 
-    private final int calories;
+    private int calories;
 
     public Meal() {
 
@@ -17,7 +17,6 @@ public class Meal extends AbstractBaseEntity {
 
     public Meal(Meal m) {
         this(m.getId(), m.getDateTime(), m.getDescription(), m.getCalories());
-        //TODO: разобраться, нужен ли вообще этот класс и почему поля подчеркиваются после создания пустого конструктора
     }
 
     public Meal(LocalDateTime dateTime, String description, int calories) {
@@ -49,6 +48,18 @@ public class Meal extends AbstractBaseEntity {
 
     public LocalTime getTime() {
         return dateTime.toLocalTime();
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
     }
 
     @Override
