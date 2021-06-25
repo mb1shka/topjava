@@ -13,7 +13,6 @@ import java.util.Arrays;
 import static ru.javawebinar.topjava.UserTestData.NOT_FOUND;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
-@Ignore
 public class InMemoryAdminRestControllerTest {
     private static final Logger log = LoggerFactory.getLogger(InMemoryAdminRestControllerTest.class);
 
@@ -25,7 +24,7 @@ public class InMemoryAdminRestControllerTest {
     //выполняется один раз перед всем тестированием
     //выполняется после того как JUnit создал экхемпляр InMemory... класса (класса, в котором пишется метод)
     public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/inmemory.xml");
         //поднимаем контекст Спринга
         log.info("\n{}\n", Arrays.toString(appCtx.getBeanDefinitionNames()));
         //С помощью контекста (DI) мы получаем доступ к классам
