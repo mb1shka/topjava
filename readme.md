@@ -1,2 +1,2 @@
-Codacy Badge [![Codacy Badge](https://app.codacy.com/project/badge/Grade/5d5c638881e14771a9c59449f8792b63)](https://www.codacy.com/gh/mb1shka/topjava/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mb1shka/topjava&amp;utm_campaign=Badge_Grade)
-Build Status
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/5d5c638881e14771a9c59449f8792b63)](https://www.codacy.com/gh/mb1shka/topjava/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mb1shka/topjava&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.com/mb1shka/topjava.svg?branch=master)](https://travis-ci.com/mb1shka/topjava)
