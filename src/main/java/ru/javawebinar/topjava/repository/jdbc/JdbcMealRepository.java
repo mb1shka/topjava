@@ -17,7 +17,6 @@ import java.util.List;
 
 @Repository
 public class JdbcMealRepository implements MealRepository {
-    //TODO: сделать реализацию в домашнем задании
 
     private static final RowMapper<Meal> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Meal.class);
 
