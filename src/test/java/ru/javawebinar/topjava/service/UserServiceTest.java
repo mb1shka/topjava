@@ -21,8 +21,8 @@ import static ru.javawebinar.topjava.UserTestData.*;
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"
-        //весь контекст спринга
 })
+//весь контекст спринга
 @RunWith(SpringRunner.class)
 //через аннотацию запускается спринг
 
