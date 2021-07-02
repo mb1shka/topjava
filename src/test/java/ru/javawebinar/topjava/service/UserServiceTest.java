@@ -33,7 +33,6 @@ import static ru.javawebinar.topjava.UserTestData.*;
 //чтобы избежать конфликтов при тестировании
 public class UserServiceTest {
 
-    //TODO: СДЕЛАТЬ MealServiceTest
 
     @Autowired
     private UserService service;
