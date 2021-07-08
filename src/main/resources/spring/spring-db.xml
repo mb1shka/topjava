@@ -14,14 +14,14 @@
     <beans profile="jdbc">
         <context:component-scan base-package="ru.javawebinar.**.repository.jdbc"/>
 
+        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+            <constructor-arg ref="dataSource"/>
+        </bean>
+
         <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
             <jdbc:script location="${jdbc.initLocation}"/>
             <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
         </jdbc:initialize-database>
-
-        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-            <constructor-arg ref="dataSource"/>
-        </bean>
 
         <bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
             <constructor-arg ref="jdbcTemplate"/>
@@ -37,7 +37,7 @@
         <jpa:repositories base-package="ru.javawebinar.**.repository.datajpa"/>
     </beans>
 
-    <beans profile="datajpa, jpa">
+    <beans profile="datajpa,jpa">
         <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
               p:dataSource-ref="dataSource"
               p:packagesToScan="ru.javawebinar.**.model">
